@@ -1,0 +1,110 @@
+# SEU CONTO - Configuração Apache (.htaccess)
+
+# Habilita RewriteEngine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Define o diretório base (ajuste se necessário)
+    # Para ambiente de desenvolvimento em subpasta: RewriteBase /refactor/
+    # Para produção na raiz: RewriteBase /
+    RewriteBase /
+
+    # Previne acesso direto a arquivos sensíveis
+    <FilesMatch "^\.">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+
+    # Protege arquivos de configuração
+    <FilesMatch "^(\.env|\.htaccess|composer\.json|composer\.lock|package\.json)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+
+    # Permite acesso a arquivos CSS, JS, imagens
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_URI} \.(css|js|jpg|jpeg|png|gif|svg|webp|ico|woff|woff2|ttf|eot|pdf)$ [NC]
+    RewriteRule ^ - [L]
+
+    # Permite acesso direto a arquivos e diretórios existentes
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Redireciona para index.php se não existir
+    RewriteRule ^index\.php$ - [L]
+</IfModule>
+
+# Configurações de segurança
+<IfModule mod_headers.c>
+    # Proteção XSS
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Previne MIME type sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Previne clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Habilita HSTS (apenas em produção HTTPS)
+    # Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Compressão GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache de recursos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Imagens
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # CSS e JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+
+    # Fontes
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+</IfModule>
+
+# Configurações PHP (se mod_php estiver habilitado)
+<IfModule mod_php.c>
+    # Define charset padrão
+    php_value default_charset "UTF-8"
+
+    # Aumenta limites (ajuste conforme necessário)
+    php_value upload_max_filesize "10M"
+    php_value post_max_size "10M"
+    php_value max_execution_time "300"
+    php_value max_input_time "300"
+
+    # Desabilita exibição de erros em produção
+    # php_flag display_errors Off
+    # php_flag display_startup_errors Off
+
+    # Em desenvolvimento, habilite:
+    php_flag display_errors On
+    php_flag display_startup_errors On
+    php_value error_reporting E_ALL
+</IfModule>
+
+# Desabilita listagem de diretórios
+Options -Indexes
+
+# Segue links simbólicos
+Options +FollowSymLinks
+
+# Página de erro personalizada (crie estas páginas se desejar)
+# ErrorDocument 404 /404.php
+# ErrorDocument 500 /500.php
