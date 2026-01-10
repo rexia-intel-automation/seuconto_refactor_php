@@ -44,12 +44,12 @@
                 <div class="footer-column">
                     <h4>Links Rápidos</h4>
                     <ul class="footer-links">
-                        <li><a href="/refactor/index.php">Início</a></li>
-                        <li><a href="/refactor/pages/criar.php">Criar Meu Conto</a></li>
-                        <li><a href="/refactor/index.php#temas">Ver Temas</a></li>
-                        <li><a href="/refactor/index.php#como-funciona">Como Funciona</a></li>
-                        <li><a href="/refactor/index.php#depoimentos">Depoimentos</a></li>
-                        <li><a href="/refactor/index.php#faq">Perguntas Frequentes</a></li>
+                        <li><a href="<?php echo url('index.php'); ?>">Início</a></li>
+                        <li><a href="<?php echo url('pages/criar.php'); ?>">Criar Meu Conto</a></li>
+                        <li><a href="<?php echo url('index.php#temas'); ?>">Ver Temas</a></li>
+                        <li><a href="<?php echo url('index.php#como-funciona'); ?>">Como Funciona</a></li>
+                        <li><a href="<?php echo url('index.php#depoimentos'); ?>">Depoimentos</a></li>
+                        <li><a href="<?php echo url('index.php#faq'); ?>">Perguntas Frequentes</a></li>
                     </ul>
                 </div>
 
@@ -57,10 +57,10 @@
                 <div class="footer-column">
                     <h4>Legal</h4>
                     <ul class="footer-links">
-                        <li><a href="/refactor/pages/termos.php">Termos de Uso</a></li>
-                        <li><a href="/refactor/pages/privacidade.php">Política de Privacidade</a></li>
-                        <li><a href="/refactor/pages/cookies.php">Política de Cookies</a></li>
-                        <li><a href="/refactor/pages/devolucoes.php">Política de Devoluções</a></li>
+                        <li><a href="<?php echo url('pages/termos.php'); ?>">Termos de Uso</a></li>
+                        <li><a href="<?php echo url('pages/privacidade.php'); ?>">Política de Privacidade</a></li>
+                        <li><a href="<?php echo url('pages/cookies.php'); ?>">Política de Cookies</a></li>
+                        <li><a href="<?php echo url('pages/devolucoes.php'); ?>">Política de Devoluções</a></li>
                     </ul>
                 </div>
 
@@ -138,7 +138,11 @@
     </a>
 
     <!-- JavaScript Global -->
-    <script src="/refactor/assets/js/main.js"></script>
+    <script>
+        // Define BASE_PATH para uso em JavaScript
+        window.BASE_PATH = '<?php echo BASE_PATH; ?>';
+    </script>
+    <script src="<?php echo asset('js/main.js'); ?>"></script>
     <?php if (isset($additionalJS)): ?>
         <?php foreach ($additionalJS as $js): ?>
             <script src="<?php echo $js; ?>"></script>

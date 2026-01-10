@@ -5,6 +5,11 @@
  * Componente de cabeçalho usado em todas as páginas
  */
 
+// Inclui configuração de paths
+if (!defined('BASE_PATH')) {
+    require_once __DIR__ . '/../config/paths.php';
+}
+
 // Inclui sessão se não estiver incluída
 if (!function_exists('isLoggedIn')) {
     require_once __DIR__ . '/session.php';
@@ -25,10 +30,10 @@ $isLoggedIn = isLoggedIn();
     <title><?php echo $pageTitle ?? 'Seu Conto - Livros Infantis Personalizados com IA'; ?></title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/refactor/assets/images/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="<?php echo asset('images/favicon.svg'); ?>">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/refactor/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo asset('css/main.css'); ?>">
     <?php if (isset($additionalCSS)): ?>
         <?php foreach ($additionalCSS as $css): ?>
             <link rel="stylesheet" href="<?php echo $css; ?>">
@@ -50,7 +55,7 @@ $isLoggedIn = isLoggedIn();
         <!-- Navegação Principal -->
         <div class="header-main container">
             <!-- Logo -->
-            <a href="/refactor/index.php" class="logo">
+            <a href="<?php echo url('index.php'); ?>" class="logo">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
@@ -79,7 +84,7 @@ $isLoggedIn = isLoggedIn();
                                 <p style="font-size: 0.875rem; color: var(--color-muted-foreground); margin: 0;"><?php echo e($currentUser['email']); ?></p>
                             </div>
                             <div style="padding: 0.5rem;">
-                                <a href="/refactor/pages/dashboard.php" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-radius: var(--radius); color: var(--color-foreground); transition: background var(--transition-fast); text-decoration: none;">
+                                <a href="<?php echo url('pages/dashboard.php'); ?>" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-radius: var(--radius); color: var(--color-foreground); transition: background var(--transition-fast); text-decoration: none;">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <rect x="3" y="3" width="7" height="7"></rect>
                                         <rect x="14" y="3" width="7" height="7"></rect>
@@ -101,8 +106,8 @@ $isLoggedIn = isLoggedIn();
                     </div>
                 <?php else: ?>
                     <!-- Usuário Não Logado -->
-                    <a href="/refactor/pages/auth/login.php" class="btn btn-outline btn-sm">Entrar</a>
-                    <a href="/refactor/pages/criar.php" class="btn btn-secondary btn-sm" style="border-radius: 9999px;">Criar Meu Conto</a>
+                    <a href="<?php echo url('pages/auth/login.php'); ?>" class="btn btn-outline btn-sm">Entrar</a>
+                    <a href="<?php echo url('pages/criar.php'); ?>" class="btn btn-secondary btn-sm" style="border-radius: 9999px;">Criar Meu Conto</a>
                 <?php endif; ?>
             </nav>
 
@@ -125,11 +130,11 @@ $isLoggedIn = isLoggedIn();
                 <a href="#faq" class="nav-link" style="display: block; padding: 0.75rem 0; border-bottom: 1px solid var(--color-border);" onclick="scrollToSection('faq', event)">Dúvidas</a>
 
                 <?php if ($isLoggedIn): ?>
-                    <a href="/refactor/pages/dashboard.php" class="btn btn-primary btn-full" style="margin-top: 1rem;">Dashboard</a>
+                    <a href="<?php echo url('pages/dashboard.php'); ?>" class="btn btn-primary btn-full" style="margin-top: 1rem;">Dashboard</a>
                     <button id="logout-button-mobile" class="btn btn-outline btn-full" style="margin-top: 0.5rem;">Sair</button>
                 <?php else: ?>
-                    <a href="/refactor/pages/auth/login.php" class="btn btn-outline btn-full" style="margin-top: 1rem;">Entrar</a>
-                    <a href="/refactor/pages/criar.php" class="btn btn-secondary btn-full" style="margin-top: 0.5rem;">Criar Meu Conto</a>
+                    <a href="<?php echo url('pages/auth/login.php'); ?>" class="btn btn-outline btn-full" style="margin-top: 1rem;">Entrar</a>
+                    <a href="<?php echo url('pages/criar.php'); ?>" class="btn btn-secondary btn-full" style="margin-top: 0.5rem;">Criar Meu Conto</a>
                 <?php endif; ?>
             </div>
         </nav>
@@ -155,8 +160,12 @@ $isLoggedIn = isLoggedIn();
                 if (event) event.preventDefault();
 
                 // Se não estiver na home, redireciona com hash
-                if (!window.location.pathname.includes('index.php') && window.location.pathname !== '/refactor/' && window.location.pathname !== '/refactor') {
-                    window.location.href = '/refactor/index.php#' + sectionId;
+                const basePath = '<?php echo BASE_PATH; ?>';
+                const currentPath = window.location.pathname;
+                const isHome = currentPath.endsWith('index.php') || currentPath === basePath + '/' || currentPath === basePath;
+
+                if (!isHome) {
+                    window.location.href = basePath + '/index.php#' + sectionId;
                     return;
                 }
 

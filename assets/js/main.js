@@ -7,7 +7,8 @@
 // ============================================
 // CONSTANTES
 // ============================================
-const API_BASE_URL = '/refactor/api';
+const BASE_PATH = window.BASE_PATH || '';
+const API_BASE_URL = BASE_PATH + '/api';
 const TOAST_DURATION = 5000;
 
 // ============================================
