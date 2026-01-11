@@ -129,19 +129,5 @@ class StripeConfig {
     }
 }
 
-/**
- * Preços padrão (em centavos)
- */
-define('PRICE_EBOOK', (int) env('PRICE_EBOOK', 2990));  // R$ 29,90
-define('PRICE_COLORING_BOOK', (int) env('PRICE_COLORING_BOOK', 990));  // R$ 9,90
-
-/**
- * Formata valor em centavos para Real brasileiro
- *
- * @param int $cents Valor em centavos
- * @return string Valor formatado (ex: "R$ 29,90")
- */
-function formatPrice($cents) {
-    $reais = $cents / 100;
-    return 'R$ ' . number_format($reais, 2, ',', '.');
-}
+// Nota: Constantes de preço e função formatPrice()
+// foram movidas para config/config.php para centralização
