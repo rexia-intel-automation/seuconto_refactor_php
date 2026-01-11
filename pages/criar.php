@@ -3,7 +3,7 @@ $pageTitle = 'Criar Meu Livro - Seu Conto';
 $additionalCSS = [];
 $additionalJS = [];
 
-require_once __DIR__ . '/../includes/session.php';
+require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/header.php';
 ?>
