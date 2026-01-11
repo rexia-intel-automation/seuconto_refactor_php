@@ -3,7 +3,7 @@ $pageTitle = 'Login - Seu Conto';
 $additionalCSS = ['/refactor/assets/css/auth.css'];
 $additionalJS = ['/refactor/assets/js/auth.js'];
 
-require_once __DIR__ . '/../../includes/session.php';
+require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/functions.php';
 
 // Redireciona se já está logado
