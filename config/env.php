@@ -79,3 +79,47 @@ function env($key, $default = null) {
 
 // Carrega as variáveis automaticamente quando o arquivo é incluído
 loadEnv();
+
+// ============================================
+// EXEMPLO DE VARIÁVEIS ESPERADAS NO .env
+// ============================================
+/*
+# Ambiente da Aplicação
+APP_ENV=development
+DEBUG=true
+BASE_PATH=/refactor
+
+# Banco de Dados
+DB_HOST=localhost
+DB_NAME=seuconto
+DB_USER=root
+DB_PASSWORD=
+DB_CHARSET=utf8mb4
+
+# Stripe (Pagamentos)
+STRIPE_PUBLISHABLE_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+STRIPE_EBOOK_PRICE_ID=price_...
+STRIPE_COLORING_BOOK_PRICE_ID=price_...
+
+# Preços (em centavos)
+PRICE_EBOOK=2990
+PRICE_COLORING_BOOK=990
+
+# n8n (Automação e IA)
+N8N_WEBHOOK_URL=https://n8n.seudominio.com/webhook/generate-book
+N8N_WEBHOOK_SECRET=seu_secret_aleatorio_aqui
+N8N_STATUS_CALLBACK_URL=https://seusite.com/api/n8n-callback.php
+
+# Email (SMTP)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USERNAME=seu-email@gmail.com
+SMTP_PASSWORD=sua-senha-app
+SMTP_FROM_EMAIL=noreply@seuconto.com.br
+SMTP_FROM_NAME=Seu Conto
+
+# URLs
+SITE_URL=https://seuconto.com.br
+*/
