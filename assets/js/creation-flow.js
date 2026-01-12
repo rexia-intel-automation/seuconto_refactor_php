@@ -12,6 +12,8 @@ class CreationFlow {
     constructor() {
         this.currentStep = 1;
         this.maxSteps = 4;
+        // BASE_PATH é definido no head.php via <script>window.BASE_PATH = '...';</script>
+        this.basePath = window.BASE_PATH || '';
         this.data = this.loadFromStorage() || {
             theme: null,
             childName: null,
@@ -22,6 +24,15 @@ class CreationFlow {
         };
 
         this.init();
+    }
+
+    /**
+     * Gera URL completa com base path
+     * @param {string} path - Caminho relativo (ex: '/api/upload.php')
+     * @returns {string} URL completa
+     */
+    url(path) {
+        return this.basePath + path;
     }
 
     /**
@@ -200,7 +211,7 @@ class CreationFlow {
             const formData = new FormData();
             formData.append('photo', file);
 
-            const response = await fetch('/api/upload-photo.php', {
+            const response = await fetch(this.url('/api/upload-photo.php'), {
                 method: 'POST',
                 body: formData
             });
@@ -320,7 +331,7 @@ class CreationFlow {
 
         const poll = async () => {
             try {
-                const response = await fetch(`/api/check-order-status.php?order_id=${orderId}`);
+                const response = await fetch(this.url(`/api/check-order-status.php?order_id=${orderId}`));
                 const result = await response.json();
 
                 if (result.success) {
@@ -393,7 +404,7 @@ class CreationFlow {
         try {
             this.showLoading(true);
 
-            const response = await fetch('/api/create-order.php', {
+            const response = await fetch(this.url('/api/create-order.php'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -437,10 +448,10 @@ class CreationFlow {
      */
     goToStep(step) {
         const stepUrls = {
-            1: '/pages/create/step1-theme.php',
-            2: '/pages/create/step2-photo.php',
-            3: `/pages/create/step3-processing.php?order_id=${this.data.orderId}`,
-            4: `/pages/create/step4-checkout.php?order_id=${this.data.orderId}`
+            1: this.url('/pages/create/step1-theme.php'),
+            2: this.url('/pages/create/step2-photo.php'),
+            3: this.url(`/pages/create/step3-processing.php?order_id=${this.data.orderId}`),
+            4: this.url(`/pages/create/step4-checkout.php?order_id=${this.data.orderId}`)
         };
 
         if (stepUrls[step]) {

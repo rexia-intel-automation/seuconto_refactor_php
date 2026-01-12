@@ -7,8 +7,10 @@
  * independente do ambiente
  */
 
-// Define o diretório raiz do projeto
-define('ROOT_DIR', dirname(__DIR__));
+// Define o diretório raiz do projeto (se não estiver definido)
+if (!defined('ROOT_DIR')) {
+    define('ROOT_DIR', dirname(__DIR__));
+}
 
 // Define o caminho base da URL
 // Para desenvolvimento local em subpasta: '/refactor'

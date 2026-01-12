@@ -1,13 +1,29 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<?php
+/**
+ * Head Component - Meta tags e CSS
+ *
+ * Este componente contém APENAS o conteúdo interno da tag <head>.
+ * A página pai é responsável por declarar <!DOCTYPE>, <html> e <head>.
+ *
+ * Variáveis disponíveis (definir antes de incluir):
+ * - $pageTitle: Título da página
+ * - $pageDescription: Meta description
+ * - $pageKeywords: Meta keywords
+ * - $additionalCSS: Array de URLs de CSS adicionais
+ */
+
+// Inclui paths.php para ter acesso à função asset() e BASE_URL
+if (!function_exists('asset')) {
+    require_once __DIR__ . '/../config/paths.php';
+}
+?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo $pageDescription ?? 'Transforme sua criança no protagonista de uma história mágica personalizada com inteligência artificial'; ?>">
-    <meta name="keywords" content="<?php echo $pageKeywords ?? 'livros personalizados, histórias infantis, IA, presente criativo, e-book infantil'; ?>">
+    <meta name="description" content="<?php echo htmlspecialchars($pageDescription ?? 'Transforme sua criança no protagonista de uma história mágica personalizada com inteligência artificial'); ?>">
+    <meta name="keywords" content="<?php echo htmlspecialchars($pageKeywords ?? 'livros personalizados, histórias infantis, IA, presente criativo, e-book infantil'); ?>">
     <meta name="author" content="Seu Conto">
 
-    <title><?php echo $pageTitle ?? 'Seu Conto - Livros Infantis Personalizados com IA'; ?></title>
+    <title><?php echo htmlspecialchars($pageTitle ?? 'Seu Conto - Livros Infantis Personalizados com IA'); ?></title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="<?php echo asset('images/favicon.svg'); ?>">
@@ -22,22 +38,23 @@
     <!-- CSS Adicional (definido pela página) -->
     <?php if (isset($additionalCSS) && is_array($additionalCSS)): ?>
         <?php foreach ($additionalCSS as $css): ?>
-            <link rel="stylesheet" href="<?php echo $css; ?>">
+            <link rel="stylesheet" href="<?php echo htmlspecialchars($css); ?>">
         <?php endforeach; ?>
     <?php endif; ?>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="<?php echo BASE_URL . $_SERVER['REQUEST_URI']; ?>">
-    <meta property="og:title" content="<?php echo $pageTitle ?? 'Seu Conto - Livros Infantis Personalizados'; ?>">
-    <meta property="og:description" content="<?php echo $pageDescription ?? 'Histórias mágicas personalizadas criadas com IA'; ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars(BASE_URL . $_SERVER['REQUEST_URI']); ?>">
+    <meta property="og:title" content="<?php echo htmlspecialchars($pageTitle ?? 'Seu Conto - Livros Infantis Personalizados'); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($pageDescription ?? 'Histórias mágicas personalizadas criadas com IA'); ?>">
     <meta property="og:image" content="<?php echo BASE_URL . '/assets/img/og-image.jpg'; ?>">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="<?php echo BASE_URL . $_SERVER['REQUEST_URI']; ?>">
-    <meta property="twitter:title" content="<?php echo $pageTitle ?? 'Seu Conto - Livros Infantis Personalizados'; ?>">
-    <meta property="twitter:description" content="<?php echo $pageDescription ?? 'Histórias mágicas personalizadas criadas com IA'; ?>">
+    <meta property="twitter:url" content="<?php echo htmlspecialchars(BASE_URL . $_SERVER['REQUEST_URI']); ?>">
+    <meta property="twitter:title" content="<?php echo htmlspecialchars($pageTitle ?? 'Seu Conto - Livros Infantis Personalizados'); ?>">
+    <meta property="twitter:description" content="<?php echo htmlspecialchars($pageDescription ?? 'Histórias mágicas personalizadas criadas com IA'); ?>">
     <meta property="twitter:image" content="<?php echo BASE_URL . '/assets/img/og-image.jpg'; ?>">
-</head>
-<body>
+
+    <!-- Base Path para JavaScript -->
+    <script>window.BASE_PATH = '<?php echo BASE_PATH; ?>';</script>

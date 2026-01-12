@@ -31,6 +31,7 @@ define('SOCIAL_FACEBOOK', 'https://facebook.com/seuconto');
 // Preços (em centavos)
 define('PRICE_EBOOK', (int) env('PRICE_EBOOK', 2990));  // R$ 29,90
 define('PRICE_COLORING_BOOK', (int) env('PRICE_COLORING_BOOK', 990));  // R$ 9,90
+define('PRICE_PHYSICAL', (int) env('PRICE_PHYSICAL', 4990));  // R$ 49,90 (livro físico)
 
 // Limites de caracteres
 define('MAX_CHILD_NAME_LENGTH', 50);
@@ -166,8 +167,10 @@ if (IS_DEVELOPMENT || DEBUG_MODE) {
 }
 
 // ============================================
-// FUNÇÕES AUXILIARES
+// FUNÇÕES AUXILIARES (específicas de config)
 // ============================================
+// NOTA: formatPrice() e formatDate() estão em includes/functions.php
+// Não duplicar aqui para evitar erro "Cannot redeclare function"
 
 /**
  * Retorna informações de um tema
@@ -189,33 +192,6 @@ function getThemeInfo($themeKey) {
 function getOrderStatusLabel($status) {
     $statuses = ORDER_STATUSES;
     return $statuses[$status] ?? 'Desconhecido';
-}
-
-/**
- * Formata valor em centavos para Real brasileiro
- *
- * @param int $cents Valor em centavos
- * @return string Valor formatado (ex: "R$ 29,90")
- */
-function formatPrice($cents) {
-    $reais = $cents / 100;
-    return 'R$ ' . number_format($reais, 2, ',', '.');
-}
-
-/**
- * Formata data no padrão brasileiro
- *
- * @param string $date Data no formato SQL
- * @param bool $includeTime Se deve incluir hora
- * @return string
- */
-function formatDate($date, $includeTime = false) {
-    if (empty($date)) return '-';
-
-    $timestamp = strtotime($date);
-    $format = $includeTime ? 'd/m/Y H:i' : 'd/m/Y';
-
-    return date($format, $timestamp);
 }
 
 /**

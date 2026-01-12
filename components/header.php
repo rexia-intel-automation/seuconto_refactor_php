@@ -1,3 +1,20 @@
+<?php
+/**
+ * Header Component
+ *
+ * Inclui a navegação principal do site.
+ * Requer que auth.php seja incluído antes (via bootstrap.php)
+ */
+
+// Verifica se variáveis de autenticação estão definidas
+$isLoggedIn = function_exists('isLoggedIn') ? isLoggedIn() : false;
+$currentUser = function_exists('getCurrentUser') ? getCurrentUser() : null;
+
+// Inclui paths.php se necessário para ter acesso à função url()
+if (!function_exists('url')) {
+    require_once __DIR__ . '/../config/paths.php';
+}
+?>
     <!-- Header -->
     <header class="header">
         <!-- Barra de Promo -->
