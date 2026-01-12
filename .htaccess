@@ -16,10 +16,15 @@
     </FilesMatch>
 
     # Protege arquivos de configuração
-    <FilesMatch "^(\.env|\.htaccess|composer\.json|composer\.lock|package\.json)$">
+    <FilesMatch "^(\.env|\.htaccess|composer\.json|composer\.lock|package\.json|cleanup-temp-files\.php)$">
         Order allow,deny
         Deny from all
     </FilesMatch>
+
+    # Protege diretórios sensíveis (acesso direto negado)
+    RewriteRule ^config/ - [F,L]
+    RewriteRule ^includes/ - [F,L]
+    RewriteRule ^services/ - [F,L]
 
     # Permite acesso a arquivos CSS, JS, imagens
     RewriteCond %{REQUEST_FILENAME} -f
@@ -105,6 +110,6 @@ Options -Indexes
 # Segue links simbólicos
 Options +FollowSymLinks
 
-# Página de erro personalizada (crie estas páginas se desejar)
-# ErrorDocument 404 /404.php
-# ErrorDocument 500 /500.php
+# Páginas de erro personalizadas
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php

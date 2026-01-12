@@ -14,8 +14,11 @@ Thumbs.db
 *.swp
 *.swo
 
-# Uploads (se houver)
-uploads/
+# Uploads (arquivos enviados, mas mantém estrutura)
+uploads/temp/*
+uploads/books/*
+!uploads/temp/.gitkeep
+!uploads/books/.gitkeep
 *.pdf
 
 # Cache
