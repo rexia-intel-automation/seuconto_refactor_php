@@ -110,6 +110,6 @@ Options -Indexes
 # Segue links simbólicos
 Options +FollowSymLinks
 
-# Página de erro personalizada (crie estas páginas se desejar)
-# ErrorDocument 404 /404.php
-# ErrorDocument 500 /500.php
+# Páginas de erro personalizadas
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
