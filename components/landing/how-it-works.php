@@ -55,7 +55,7 @@
         </div>
 
         <div style="text-align: center; margin-top: 3rem;">
-            <a href="<?php echo url('pages/criar.php'); ?>" class="btn btn-secondary btn-lg" style="border-radius: 9999px;">
+            <a href="<?php echo url('pages/create/step1-theme.php'); ?>" class="btn btn-secondary btn-lg" style="border-radius: 9999px;">
                 Começar Agora →
             </a>
         </div>

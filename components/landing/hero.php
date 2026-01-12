@@ -17,7 +17,7 @@
             </p>
 
             <!-- CTA Principal -->
-            <a href="<?php echo url('pages/criar.php'); ?>" class="btn btn-secondary btn-lg" style="border-radius: 9999px; padding: 1.25rem 3rem; font-size: 1.25rem; box-shadow: var(--shadow-lg);">
+            <a href="<?php echo url('pages/create/step1-theme.php'); ?>" class="btn btn-secondary btn-lg" style="border-radius: 9999px; padding: 1.25rem 3rem; font-size: 1.25rem; box-shadow: var(--shadow-lg);">
                 Criar Meu Conto Agora →
             </a>
 
