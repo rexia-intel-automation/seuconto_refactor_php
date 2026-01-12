@@ -1,3 +1,15 @@
+<?php
+/**
+ * Footer Component
+ *
+ * Rodapé do site com links, redes sociais e scripts.
+ */
+
+// Inclui paths.php se necessário para ter acesso à função url() e asset()
+if (!function_exists('url')) {
+    require_once __DIR__ . '/../config/paths.php';
+}
+?>
     </main>
 
     <!-- Footer -->
@@ -137,11 +149,7 @@
         </svg>
     </a>
 
-    <!-- JavaScript Global -->
-    <script>
-        // Define BASE_PATH para uso em JavaScript
-        window.BASE_PATH = '<?php echo BASE_PATH; ?>';
-    </script>
+    <!-- JavaScript Global (BASE_PATH definido no head.php) -->
     <script src="<?php echo asset('js/main.js'); ?>"></script>
     <?php if (isset($additionalJS)): ?>
         <?php foreach ($additionalJS as $js): ?>

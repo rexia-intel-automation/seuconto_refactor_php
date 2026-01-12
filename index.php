@@ -5,9 +5,7 @@
  * Página inicial com apresentação do produto e CTAs
  */
 
-require_once __DIR__ . '/config/config.php';
-require_once __DIR__ . '/includes/auth.php';
-require_once __DIR__ . '/includes/functions.php';
+require_once __DIR__ . '/config/bootstrap.php';
 
 $pageTitle = 'Seu Conto - Livros Infantis Personalizados com IA';
 $pageDescription = 'Crie livros infantis personalizados com IA. Transforme fotos reais em ilustrações mágicas. Entregue em até 30 minutos!';
@@ -15,7 +13,7 @@ $pageDescription = 'Crie livros infantis personalizados com IA. Transforme fotos
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <?php include __DIR__ . '/components/head.php'; ?>
+<?php include __DIR__ . '/components/head.php'; ?>
 </head>
 <body>
 
@@ -36,9 +34,3 @@ $pageDescription = 'Crie livros infantis personalizados com IA. Transforme fotos
     </main>
 
     <?php include __DIR__ . '/components/footer.php'; ?>
-
-    <!-- Scripts -->
-    <script src="<?php echo url('assets/js/main.js'); ?>"></script>
-
-</body>
-</html>

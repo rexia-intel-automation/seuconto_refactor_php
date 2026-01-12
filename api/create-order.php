@@ -90,23 +90,21 @@ $amount = $productType === 'ebook' ? PRICE_EBOOK : PRICE_PHYSICAL;
 
 try {
     // Criar pedido usando OrderService
+    // NOTA: OrderService espera 'price' e 'photo_path', não 'amount' e 'child_photo_url'
     $orderData = [
         'user_id' => $user['id'],
+        'customer_email' => $user['email'],
+        'customer_name' => $user['name'],
         'child_name' => trim($data['child_name']),
         'child_age' => $age,
         'theme' => $data['theme'],
-        'product_type' => $productType,
-        'amount' => $amount,
-        'child_photo_url' => 'uploads/temp/' . $data['photo_file'],
-        'status' => 'pending', // Aguardando pagamento
-        'metadata' => json_encode([
-            'user_email' => $user['email'],
-            'user_name' => $user['name'],
-            'created_via' => 'wizard'
-        ])
+        'price' => $amount, // OrderService espera 'price'
+        'photo_path' => 'uploads/temp/' . $data['photo_file'], // OrderService espera 'photo_path'
+        'status' => 'pending' // Aguardando pagamento
     ];
 
-    $orderId = OrderService::createOrder($orderData);
+    $order = OrderService::createOrder($orderData);
+    $orderId = $order['id'];
 
     // Log de sucesso
     error_log("Pedido #{$orderId} criado por usuário {$user['id']}");
