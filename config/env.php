@@ -13,8 +13,10 @@
  * @return void
  */
 function loadEnv($path = __DIR__ . '/.env') {
+    // Se o arquivo .env nao existir, apenas continua sem carregar variaveis
+    // A aplicacao usara valores padrao definidos em config.php
     if (!file_exists($path)) {
-        throw new Exception("Arquivo .env não encontrado em: {$path}");
+        return;
     }
 
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
