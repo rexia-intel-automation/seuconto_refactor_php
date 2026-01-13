@@ -1,39 +1,47 @@
-<!-- Hero Section -->
-<section class="animate-on-scroll" style="padding: 3rem 0 5rem; background: radial-gradient(ellipse at top right, var(--color-accent) 0%, var(--color-background) 50%, var(--color-background) 100%);">
+<!-- Hero Section - Card Principal -->
+<section class="animate-on-scroll" style="padding: var(--space-lg) 0;">
     <div class="container">
-        <div style="text-align: center; max-width: 900px; margin: 0 auto;">
-            <!-- Badge -->
-            <div class="badge badge-primary animate-pulse" style="display: inline-flex; font-size: 0.875rem; margin-bottom: 1.5rem;">
-                ✨ O PRESENTE MAIS MÁGICO DO ANO
-            </div>
-
-            <!-- Título Principal -->
-            <h1 class="gradient-text" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 1.5rem;">
-                Sua criança VIRA o personagem de uma história mágica
-            </h1>
-
-            <p class="text-muted" style="font-size: 1.25rem; margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-                Livros personalizados com IA que transformam fotos reais em ilustrações encantadoras. Entregue em até 30 minutos!
-            </p>
-
-            <!-- CTA Principal -->
-            <a href="<?php echo url('pages/create/step1-theme.php'); ?>" class="btn btn-secondary btn-lg" style="border-radius: 9999px; padding: 1.25rem 3rem; font-size: 1.25rem; box-shadow: var(--shadow-lg);">
-                Criar Meu Conto Agora →
-            </a>
-
-            <!-- Stats -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; margin-top: 4rem; text-align: center;">
-                <div>
-                    <p style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.25rem;">1000+</p>
-                    <p class="text-muted" style="font-size: 0.875rem; margin: 0;">Livros Criados</p>
+        <div class="section-card" style="background: linear-gradient(135deg, var(--color-card) 0%, var(--color-accent) 100%);">
+            <div style="text-align: center; max-width: 900px; margin: 0 auto;">
+                <!-- Badge -->
+                <div class="badge badge-primary animate-pulse" style="margin-bottom: var(--space-lg);">
+                    ✨ O PRESENTE MAIS MAGICO DO ANO
                 </div>
-                <div>
-                    <p style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.25rem;">4.9/5</p>
-                    <p class="text-muted" style="font-size: 0.875rem; margin: 0;">Avaliação Média</p>
-                </div>
-                <div>
-                    <p style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.25rem;">30min</p>
-                    <p class="text-muted" style="font-size: 0.875rem; margin: 0;">Tempo de Entrega</p>
+
+                <!-- Titulo Principal -->
+                <h1 class="gradient-text" style="margin-bottom: var(--space-lg);">
+                    Sua crianca VIRA o personagem de uma historia magica
+                </h1>
+
+                <p class="text-muted" style="font-size: 1.125rem; margin-bottom: var(--space-xl); max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Livros personalizados com IA que transformam fotos reais em ilustracoes encantadoras. Entregue em ate 30 minutos!
+                </p>
+
+                <!-- CTA Principal -->
+                <a href="<?php echo url('pages/create/step1-theme.php'); ?>" class="btn btn-secondary btn-lg">
+                    Criar Meu Conto Agora →
+                </a>
+
+                <!-- Stats - Inner Cards -->
+                <div class="grid grid-3" style="margin-top: var(--space-2xl);">
+                    <div class="inner-card">
+                        <div class="stat-item">
+                            <span class="stat-value">1000+</span>
+                            <span class="stat-label">Livros Criados</span>
+                        </div>
+                    </div>
+                    <div class="inner-card">
+                        <div class="stat-item">
+                            <span class="stat-value">4.9/5</span>
+                            <span class="stat-label">Avaliacao Media</span>
+                        </div>
+                    </div>
+                    <div class="inner-card">
+                        <div class="stat-item">
+                            <span class="stat-value">30min</span>
+                            <span class="stat-label">Tempo de Entrega</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
