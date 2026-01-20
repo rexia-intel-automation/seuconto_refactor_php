@@ -82,6 +82,16 @@
     --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
+    /*
+     * BREAKPOINTS (Mobile-First)
+     * These are used as @media (min-width: XXpx)
+     * ------------------------------------------
+     * - 480px:  Small phones → Large phones (2-col grids)
+     * - 640px:  Tablets / Landscape phones
+     * - 768px:  Desktop (navigation visible, sidebar)
+     * - 1024px: Large desktop (expanded layouts)
+     */
+
     /* Container */
     --container-max-width: 1280px;
     --container-padding: 1rem;
@@ -1050,21 +1060,50 @@ main {
 .gap-3 { gap: var(--space-lg); }
 .gap-4 { gap: var(--space-xl); }
 
-/* Responsive visibility */
-@media (max-width: 639px) {
-    .hide-mobile { display: none !important; }
+/* Responsive visibility (Mobile-First)
+   Breakpoints: 640px (tablet), 768px (desktop)
+   -------------------------------------------- */
+
+/* Mobile-only: visible by default, hidden from tablet up */
+.show-mobile-only { display: block !important; }
+@media (min-width: 640px) {
+    .show-mobile-only { display: none !important; }
 }
 
-@media (min-width: 640px) and (max-width: 767px) {
+/* Tablet-only: hidden by default, visible 640-767px, hidden from desktop */
+.show-tablet-only { display: none !important; }
+@media (min-width: 640px) {
+    .show-tablet-only { display: block !important; }
+}
+@media (min-width: 768px) {
+    .show-tablet-only { display: none !important; }
+}
+
+/* Desktop-only: hidden by default, visible from 768px up */
+.show-desktop-only { display: none !important; }
+@media (min-width: 768px) {
+    .show-desktop-only { display: block !important; }
+}
+
+/* Hide on mobile: hidden by default, visible from tablet up */
+.hide-mobile { display: none !important; }
+@media (min-width: 640px) {
+    .hide-mobile { display: block !important; }
+}
+
+/* Hide on tablet: visible by default and on desktop, hidden 640-767px */
+.hide-tablet { display: block !important; }
+@media (min-width: 640px) {
     .hide-tablet { display: none !important; }
 }
-
 @media (min-width: 768px) {
-    .hide-desktop { display: none !important; }
+    .hide-tablet { display: block !important; }
 }
 
-@media (max-width: 767px) {
-    .show-desktop-only { display: none !important; }
+/* Hide on desktop: visible by default, hidden from 768px up */
+.hide-desktop { display: block !important; }
+@media (min-width: 768px) {
+    .hide-desktop { display: none !important; }
 }
 
 /* ============================================
