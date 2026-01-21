@@ -4,7 +4,11 @@
  * Estilos específicos para as páginas de login e registro
  *
  * Mobile-First Approach
- * Breakpoints: 640px (tablet/desktop)
+ * Breakpoints:
+ * - 320px:  Very small phones (iPhone SE, older devices)
+ * - 640px:  Tablets / Desktop
+ *
+ * Base styles (no media query) target phones < 320px
  */
 
 /* ============================================
@@ -15,8 +19,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: 0.75rem;
     background: radial-gradient(ellipse at top right, var(--color-accent) 0%, var(--color-background) 50%, var(--color-background) 100%);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .auth-container {
+        padding: 1rem;
+    }
 }
 
 /* Tablet+: more padding */
@@ -26,16 +37,25 @@
     }
 }
 
-/* Mobile: compact card padding */
+/* Very small phones: compact card */
 .auth-card {
     width: 100%;
     max-width: 480px;
     background: var(--color-card);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-xl);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    box-shadow: var(--shadow-lg);
     animation: fadeIn 0.5s ease-out;
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .auth-card {
+        border-radius: var(--radius-xl);
+        padding: 1.5rem;
+        box-shadow: var(--shadow-xl);
+    }
 }
 
 /* Tablet+: larger card padding */
@@ -50,7 +70,14 @@
    ============================================ */
 .auth-header {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .auth-header {
+        margin-bottom: 1.5rem;
+    }
 }
 
 @media (min-width: 640px) {
@@ -59,17 +86,27 @@
     }
 }
 
-/* Mobile: smaller logo */
+/* Very small phones: compact logo */
 .auth-logo {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     background: linear-gradient(135deg, var(--color-primary), oklch(0.60 0.20 280));
     border-radius: 50%;
-    margin-bottom: 0.75rem;
-    box-shadow: var(--shadow-md);
+    margin-bottom: 0.5rem;
+    box-shadow: var(--shadow);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .auth-logo {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 0.75rem;
+        box-shadow: var(--shadow-md);
+    }
 }
 
 /* Tablet+: larger logo */
@@ -82,9 +119,17 @@
 }
 
 .auth-logo svg {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     color: white;
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .auth-logo svg {
+        width: 28px;
+        height: 28px;
+    }
 }
 
 @media (min-width: 640px) {
@@ -94,13 +139,20 @@
     }
 }
 
-/* Mobile: smaller title */
+/* Very small phones: smaller title */
 .auth-title {
     font-family: var(--font-heading);
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: var(--color-foreground);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .auth-title {
+        font-size: 1.75rem;
+    }
 }
 
 /* Tablet+: larger title */
@@ -110,10 +162,17 @@
     }
 }
 
-/* Mobile: smaller subtitle */
+/* Very small phones: smaller subtitle */
 .auth-subtitle {
     color: var(--color-muted-foreground);
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .auth-subtitle {
+        font-size: 0.875rem;
+    }
 }
 
 /* Tablet+: larger subtitle */
@@ -220,19 +279,29 @@
    BOTÃO DE SUBMIT (Mobile-First)
    ============================================ */
 
-/* Mobile: smaller button */
+/* Very small phones: compact button */
 .auth-submit {
     width: 100%;
-    padding: 0.875rem;
-    font-size: 1rem;
+    padding: 0.75rem;
+    font-size: 0.9rem;
     font-weight: 700;
     background: linear-gradient(135deg, var(--color-primary), oklch(0.60 0.20 280));
     color: white;
     border: none;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius);
     cursor: pointer;
     transition: all var(--transition-base);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .auth-submit {
+        padding: 0.875rem;
+        font-size: 1rem;
+        border-radius: var(--radius-lg);
+        margin-bottom: 1.5rem;
+    }
 }
 
 /* Tablet+: larger button */
@@ -502,7 +571,8 @@
    MOBILE-FIRST RESPONSIVE NOTES
    ============================================
    This file uses a mobile-first approach.
-   Base styles are for mobile devices.
+   Base styles are for very small phones (< 320px).
    Breakpoints:
+   - 320px: Small phones (iPhone SE, older devices)
    - 640px: Tablet/Desktop
    ============================================ */

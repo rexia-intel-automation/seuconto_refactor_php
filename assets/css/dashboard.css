@@ -4,10 +4,13 @@
  * Mobile First com bordas 3px e sombras fortes
  *
  * BREAKPOINTS (Mobile-First):
- * - 480px:  Small phones → Large phones (2-col grids)
+ * - 320px:  Very small phones (iPhone SE, older devices)
+ * - 480px:  Large phones / phablets (2-col grids)
  * - 640px:  Tablets / Landscape phones
  * - 768px:  Desktop (navigation visible)
  * - 1024px: Large desktop (expanded layouts)
+ *
+ * Base styles (no media query) target phones < 320px
  */
 
 /* ============================================
@@ -15,7 +18,14 @@
    ============================================ */
 .dashboard-container {
     min-height: calc(100vh - 80px);
-    padding: var(--space-lg) 0;
+    padding: var(--space-md) 0;
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .dashboard-container {
+        padding: var(--space-lg) 0;
+    }
 }
 
 @media (min-width: 640px) {
@@ -34,9 +44,17 @@
    DASHBOARD HEADER
    ============================================ */
 .dashboard-header {
-    margin-bottom: var(--space-xl);
-    padding-bottom: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
     border-bottom: var(--border-width) var(--border-style) var(--color-border);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .dashboard-header {
+        margin-bottom: var(--space-xl);
+        padding-bottom: var(--space-lg);
+    }
 }
 
 @media (min-width: 640px) {
@@ -62,8 +80,15 @@
 }
 
 .dashboard-welcome h1 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin-bottom: var(--space-xs);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .dashboard-welcome h1 {
+        font-size: 1.5rem;
+    }
 }
 
 @media (min-width: 640px) {
@@ -119,8 +144,16 @@
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-md);
-    margin-bottom: var(--space-xl);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .stats-grid {
+        gap: var(--space-md);
+        margin-bottom: var(--space-xl);
+    }
 }
 
 @media (min-width: 480px) {
@@ -140,13 +173,23 @@
 .stat-card {
     background: var(--color-card);
     border: var(--border-width) var(--border-style) var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
+    border-radius: var(--radius);
+    padding: var(--space-md);
     display: flex;
     align-items: flex-start;
-    gap: var(--space-md);
-    box-shadow: var(--shadow);
+    gap: var(--space-sm);
+    box-shadow: var(--shadow-sm);
     transition: all var(--transition-base);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .stat-card {
+        border-radius: var(--radius-lg);
+        padding: var(--space-lg);
+        gap: var(--space-md);
+        box-shadow: var(--shadow);
+    }
 }
 
 .stat-card:hover {
@@ -155,15 +198,24 @@
 }
 
 .stat-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius);
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
     border: 2px var(--border-style) var(--color-border);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     box-shadow: var(--shadow-xs);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius);
+    }
 }
 
 @media (min-width: 640px) {
@@ -203,10 +255,17 @@
 }
 
 .stat-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: var(--space-xs);
     color: var(--color-foreground);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .stat-content h3 {
+        font-size: 1.5rem;
+    }
 }
 
 @media (min-width: 640px) {
@@ -297,7 +356,14 @@
 .books-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: var(--space-md);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .books-grid {
+        gap: var(--space-lg);
+    }
 }
 
 @media (min-width: 640px) {

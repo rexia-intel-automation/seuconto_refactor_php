@@ -95,16 +95,16 @@ if (!function_exists('url')) {
         </div>
 
         <!-- Menu Mobile -->
-        <nav id="mobile-menu" class="hidden" style="background: var(--color-card); border-top: var(--border-width) solid var(--color-border); padding: var(--space-lg);">
+        <nav id="mobile-menu" class="mobile-menu hidden">
             <div class="container">
-                <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
-                    <a href="#como-funciona" class="nav-link" style="display: block; padding: var(--space-md); border: 2px solid var(--color-border-light); border-radius: var(--radius); background: var(--color-card);" onclick="scrollToSection('como-funciona', event)">Como Funciona</a>
-                    <a href="#temas" class="nav-link" style="display: block; padding: var(--space-md); border: 2px solid var(--color-border-light); border-radius: var(--radius); background: var(--color-card);" onclick="scrollToSection('temas', event)">Temas</a>
-                    <a href="#depoimentos" class="nav-link" style="display: block; padding: var(--space-md); border: 2px solid var(--color-border-light); border-radius: var(--radius); background: var(--color-card);" onclick="scrollToSection('depoimentos', event)">Depoimentos</a>
-                    <a href="#faq" class="nav-link" style="display: block; padding: var(--space-md); border: 2px solid var(--color-border-light); border-radius: var(--radius); background: var(--color-card);" onclick="scrollToSection('faq', event)">Duvidas</a>
+                <div class="mobile-menu-links">
+                    <a href="#como-funciona" class="mobile-menu-link" onclick="scrollToSection('como-funciona', event)">Como Funciona</a>
+                    <a href="#temas" class="mobile-menu-link" onclick="scrollToSection('temas', event)">Temas</a>
+                    <a href="#depoimentos" class="mobile-menu-link" onclick="scrollToSection('depoimentos', event)">Depoimentos</a>
+                    <a href="#faq" class="mobile-menu-link" onclick="scrollToSection('faq', event)">Duvidas</a>
                 </div>
 
-                <div style="margin-top: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-sm);">
+                <div class="mobile-menu-actions">
                     <?php if ($isLoggedIn): ?>
                         <a href="<?php echo url('pages/dashboard.php'); ?>" class="btn btn-primary btn-full">Dashboard</a>
                         <button id="logout-button-mobile" class="btn btn-outline btn-full">Sair</button>

@@ -86,10 +86,13 @@
      * BREAKPOINTS (Mobile-First)
      * These are used as @media (min-width: XXpx)
      * ------------------------------------------
-     * - 480px:  Small phones → Large phones (2-col grids)
+     * - 320px:  Very small phones (iPhone SE, older devices)
+     * - 480px:  Large phones / phablets (2-col grids)
      * - 640px:  Tablets / Landscape phones
      * - 768px:  Desktop (navigation visible, sidebar)
      * - 1024px: Large desktop (expanded layouts)
+     *
+     * Base styles (no media query) target phones < 320px
      */
 
     /* Container */
@@ -145,13 +148,23 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-foreground);
 }
 
-/* Mobile sizes */
-h1 { font-size: 1.75rem; }
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.25rem; }
-h4 { font-size: 1.125rem; }
-h5 { font-size: 1rem; }
-h6 { font-size: 0.875rem; }
+/* Very small phones (base) */
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.125rem; }
+h4 { font-size: 1rem; }
+h5 { font-size: 0.9rem; }
+h6 { font-size: 0.8rem; }
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1.125rem; }
+    h5 { font-size: 1rem; }
+    h6 { font-size: 0.875rem; }
+}
 
 /* Tablet+ sizes */
 @media (min-width: 640px) {
@@ -190,7 +203,14 @@ a:hover {
     width: 100%;
     max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: 0 var(--container-padding);
+    padding: 0 0.75rem; /* Very small phones: tight padding */
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .container {
+        padding: 0 var(--container-padding);
+    }
 }
 
 @media (min-width: 640px) {
@@ -215,12 +235,22 @@ main {
 .section-card {
     background: var(--color-card);
     border: var(--border-width) var(--border-style) var(--color-border);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
-    padding: var(--space-xl);
-    margin-bottom: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
     position: relative;
     overflow: hidden;
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .section-card {
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-lg);
+        padding: var(--space-xl);
+        margin-bottom: var(--space-xl);
+    }
 }
 
 @media (min-width: 640px) {
@@ -298,10 +328,18 @@ main {
     background: var(--color-primary);
     color: white;
     text-align: center;
-    padding: var(--space-sm) var(--space-md);
-    font-size: 0.8rem;
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.7rem;
     font-weight: 600;
     border-bottom: var(--border-width) var(--border-style) var(--color-primary-hover);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .header-promo {
+        padding: var(--space-sm) var(--space-md);
+        font-size: 0.8rem;
+    }
 }
 
 @media (min-width: 640px) {
@@ -321,11 +359,19 @@ main {
 .logo {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
     font-family: var(--font-heading);
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--color-primary);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .logo {
+        gap: var(--space-sm);
+        font-size: 1.25rem;
+    }
 }
 
 @media (min-width: 640px) {
@@ -335,8 +381,8 @@ main {
 }
 
 .logo-icon {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     background: var(--color-primary);
     border: var(--border-width) var(--border-style) var(--color-border);
     border-radius: var(--radius-sm);
@@ -345,7 +391,16 @@ main {
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.25rem;
+    font-size: 1rem;
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.25rem;
+    }
 }
 
 @media (min-width: 640px) {
@@ -385,14 +440,23 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
     background: var(--color-card);
     border: var(--border-width) var(--border-style) var(--color-border);
     border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-xs);
     cursor: pointer;
     transition: all var(--transition-fast);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .nav-mobile-toggle {
+        width: 44px;
+        height: 44px;
+        box-shadow: var(--shadow-sm);
+    }
 }
 
 .nav-mobile-toggle:hover {
@@ -411,16 +475,95 @@ main {
 }
 
 /* ============================================
+   MOBILE MENU - Full-width Navigation
+   ============================================ */
+.mobile-menu {
+    background: var(--color-card);
+    border-top: var(--border-width) solid var(--color-border);
+    padding: var(--space-md);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .mobile-menu {
+        padding: var(--space-lg);
+    }
+}
+
+/* Hide on desktop */
+@media (min-width: 768px) {
+    .mobile-menu {
+        display: none !important;
+    }
+}
+
+.mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .mobile-menu-links {
+        gap: var(--space-sm);
+    }
+}
+
+.mobile-menu-link {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    border: 2px solid var(--color-border-light);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    color: var(--color-foreground);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    font-size: 0.9rem;
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .mobile-menu-link {
+        padding: var(--space-md);
+        border-radius: var(--radius);
+        font-size: 1rem;
+    }
+}
+
+.mobile-menu-link:hover {
+    background: var(--color-accent);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.mobile-menu-actions {
+    margin-top: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .mobile-menu-actions {
+        margin-top: var(--space-lg);
+        gap: var(--space-sm);
+    }
+}
+
+/* ============================================
    BOTOES - Estilo Bold com Sombras
    ============================================ */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-sm);
-    padding: var(--space-md) var(--space-lg);
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 700;
     line-height: 1;
     border: var(--border-width) var(--border-style) var(--color-border);
@@ -428,8 +571,18 @@ main {
     cursor: pointer;
     transition: all var(--transition-base);
     text-decoration: none;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-sm);
     position: relative;
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .btn {
+        gap: var(--space-sm);
+        padding: var(--space-md) var(--space-lg);
+        font-size: 1rem;
+        box-shadow: var(--shadow);
+    }
 }
 
 .btn:hover {
@@ -531,10 +684,19 @@ main {
 .card {
     background: var(--color-card);
     border: var(--border-width) var(--border-style) var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-sm);
     transition: all var(--transition-base);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .card {
+        border-radius: var(--radius-lg);
+        padding: var(--space-lg);
+        box-shadow: var(--shadow);
+    }
 }
 
 .card:hover {
@@ -632,7 +794,14 @@ main {
    ============================================ */
 .grid {
     display: grid;
-    gap: var(--space-lg);
+    gap: var(--space-md);
+}
+
+/* Small phones 320px+ */
+@media (min-width: 320px) {
+    .grid {
+        gap: var(--space-lg);
+    }
 }
 
 /* Grid de 2 colunas */
@@ -640,7 +809,8 @@ main {
     grid-template-columns: 1fr;
 }
 
-@media (min-width: 640px) {
+/* Small phones 320px+: optional 2-col for small items */
+@media (min-width: 480px) {
     .grid-2 {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -651,7 +821,7 @@ main {
     grid-template-columns: 1fr;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 480px) {
     .grid-3 {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -668,7 +838,8 @@ main {
     grid-template-columns: 1fr;
 }
 
-@media (min-width: 480px) {
+/* Small phones 320px+: 2 columns for compact items */
+@media (min-width: 320px) {
     .grid-4 {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -688,7 +859,19 @@ main {
 
 /* Grid auto-fill */
 .grid-auto {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: 1fr; /* Very small phones: single column */
+}
+
+@media (min-width: 320px) {
+    .grid-auto {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (min-width: 640px) {
+    .grid-auto {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
 }
 
 /* Gap variations */
@@ -1061,8 +1244,23 @@ main {
 .gap-4 { gap: var(--space-xl); }
 
 /* Responsive visibility (Mobile-First)
-   Breakpoints: 640px (tablet), 768px (desktop)
-   -------------------------------------------- */
+   Breakpoints: 320px (small phone), 480px (large phone), 640px (tablet), 768px (desktop)
+   ------------------------------------------------------------------------------------- */
+
+/* Very small phone only: visible by default, hidden from 320px up */
+.show-xs-only { display: block !important; }
+@media (min-width: 320px) {
+    .show-xs-only { display: none !important; }
+}
+
+/* Small phone only: hidden by default, visible 320-479px */
+.show-sm-only { display: none !important; }
+@media (min-width: 320px) {
+    .show-sm-only { display: block !important; }
+}
+@media (min-width: 480px) {
+    .show-sm-only { display: none !important; }
+}
 
 /* Mobile-only: visible by default, hidden from tablet up */
 .show-mobile-only { display: block !important; }
