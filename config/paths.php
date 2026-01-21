@@ -31,20 +31,40 @@ function getBasePath() {
         return BASE_PATH_ENV;
     }
 
-    // Detecta automaticamente baseado no SCRIPT_NAME
-    $scriptName = $_SERVER['SCRIPT_NAME'];
-    $basePath = dirname($scriptName);
+    // Detecta baseado na diferença entre ROOT_DIR e DOCUMENT_ROOT
+    $documentRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '');
+    $rootDir = realpath(ROOT_DIR);
 
-    // Remove index.php se existir
-    $basePath = str_replace('/index.php', '', $basePath);
-
-    // Se estiver na raiz, retorna string vazia
-    if ($basePath === '/' || $basePath === '\\') {
-        return '';
+    if ($documentRoot && $rootDir && strpos($rootDir, $documentRoot) === 0) {
+        $basePath = substr($rootDir, strlen($documentRoot));
+        // Normaliza barras para URL (sempre /)
+        $basePath = str_replace('\\', '/', $basePath);
+        return $basePath ?: '';
     }
 
-    // Retorna o caminho normalizado
-    return rtrim($basePath, '/');
+    // Fallback: extrai do SCRIPT_NAME procurando diretórios conhecidos do projeto
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+
+    // Procura por marcadores conhecidos da estrutura do projeto
+    $markers = ['/pages/', '/api/', '/assets/', '/components/', '/config/'];
+    foreach ($markers as $marker) {
+        $pos = strpos($scriptName, $marker);
+        if ($pos !== false) {
+            $basePath = substr($scriptName, 0, $pos);
+            return $basePath ?: '';
+        }
+    }
+
+    // Último fallback: se for index.php na raiz
+    if (basename($scriptName) === 'index.php') {
+        $basePath = dirname($scriptName);
+        if ($basePath === '/' || $basePath === '\\') {
+            return '';
+        }
+        return rtrim($basePath, '/');
+    }
+
+    return '';
 }
 
 // Define a constante BASE_PATH
