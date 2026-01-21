@@ -170,18 +170,6 @@ if (!function_exists('url')) {
                 }
             }
 
-            // Toggle menu mobile
-            document.addEventListener('DOMContentLoaded', function() {
-                const mobileToggle = document.getElementById('mobile-menu-toggle');
-                const mobileMenu = document.getElementById('mobile-menu');
-
-                if (mobileToggle && mobileMenu) {
-                    mobileToggle.addEventListener('click', function() {
-                        mobileMenu.classList.toggle('hidden');
-                    });
-                }
-            });
-
             // Fecha menu ao clicar fora
             document.addEventListener('click', function(event) {
                 const dropdown = document.getElementById('user-dropdown');
