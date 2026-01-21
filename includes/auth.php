@@ -10,6 +10,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Carrega paths.php se url() não estiver disponível
+if (!function_exists('url')) {
+    require_once __DIR__ . '/../config/paths.php';
+}
+
 /**
  * Verifica se o usuário está autenticado
  *
@@ -76,7 +81,7 @@ function clearUserSession() {
  */
 function requireAuth($redirectTo = '') {
     if (!isLoggedIn()) {
-        $loginUrl = '/refactor/pages/auth/login.php';
+        $loginUrl = url('pages/auth/login.php');
 
         if ($redirectTo) {
             $loginUrl .= '?redirect=' . urlencode($redirectTo);
@@ -103,7 +108,7 @@ function requireAdmin() {
     requireAuth();
 
     if (!isAdmin()) {
-        header('Location: /refactor/pages/dashboard.php');
+        header('Location: ' . url('pages/dashboard.php'));
         exit;
     }
 }

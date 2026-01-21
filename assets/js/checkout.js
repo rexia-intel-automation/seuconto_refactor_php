@@ -113,7 +113,7 @@ function displayOrderSummary() {
             'warning'
         );
         setTimeout(() => {
-            window.location.href = '/refactor/pages/criar.php';
+            window.location.href = window.BASE_PATH + '/pages/create/step1-theme.php';
         }, 2000);
         return;
     }
@@ -165,7 +165,7 @@ async function handleCheckout(event) {
             'error'
         );
         setTimeout(() => {
-            window.location.href = '/refactor/pages/criar.php';
+            window.location.href = window.BASE_PATH + '/pages/create/step1-theme.php';
         }, 2000);
         return;
     }
@@ -195,7 +195,7 @@ async function handleCheckout(event) {
     window.SeuConto.setButtonLoading(submitButton);
 
     try {
-        const response = await window.SeuConto.fetchAPI('/refactor/api/checkout.php', {
+        const response = await window.SeuConto.fetchAPI(window.BASE_PATH + '/api/checkout.php', {
             method: 'POST',
             body: JSON.stringify(payload)
         });
@@ -260,7 +260,7 @@ async function applyCoupon() {
     window.SeuConto.setButtonLoading(couponButton);
 
     try {
-        const response = await window.SeuConto.fetchAPI('/refactor/api/checkout.php', {
+        const response = await window.SeuConto.fetchAPI(window.BASE_PATH + '/api/checkout.php', {
             method: 'POST',
             body: JSON.stringify({
                 action: 'validateCoupon',
@@ -298,7 +298,7 @@ async function applyCoupon() {
  */
 function goBackToEdit() {
     if (confirm('Deseja voltar para editar os dados do livro?')) {
-        window.location.href = '/refactor/pages/criar.php';
+        window.location.href = window.BASE_PATH + '/pages/create/step1-theme.php';
     }
 }
 

@@ -1,17 +1,29 @@
 <?php
-$pageTitle = 'Criar Conta - Seu Conto';
-$additionalCSS = ['/refactor/assets/css/auth.css'];
-$additionalJS = ['/refactor/assets/js/auth.js'];
+/**
+ * Register Page
+ */
 
+require_once __DIR__ . '/../../config/paths.php';
 require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/functions.php';
 
-if (isLoggedIn()) {
-    redirect('/refactor/pages/dashboard.php');
-}
+$pageTitle = 'Criar Conta - Seu Conto';
+$pageDescription = 'Crie sua conta e comece a criar histórias mágicas';
 
-require_once __DIR__ . '/../../includes/header.php';
+// Redireciona se já está logado
+if (isLoggedIn()) {
+    redirectTo('pages/dashboard.php');
+}
 ?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <?php include __DIR__ . '/../../components/head.php'; ?>
+    <link rel="stylesheet" href="<?php echo asset('css/auth.css'); ?>">
+</head>
+<body>
+
+    <?php include __DIR__ . '/../../components/header.php'; ?>
 
 <div class="auth-container">
     <div class="auth-card">
@@ -59,16 +71,19 @@ require_once __DIR__ . '/../../includes/header.php';
 
             <div class="terms-checkbox">
                 <input type="checkbox" id="terms" name="terms" required>
-                <label for="terms">Aceito os <a href="/refactor/pages/termos.php" target="_blank">Termos de Uso</a> e <a href="/refactor/pages/privacidade.php" target="_blank">Política de Privacidade</a></label>
+                <label for="terms">Aceito os <a href="<?php echo url('pages/legal/terms.php'); ?>" target="_blank">Termos de Uso</a> e <a href="<?php echo url('pages/legal/privacy.php'); ?>" target="_blank">Política de Privacidade</a></label>
             </div>
 
             <button type="submit" class="auth-submit">Criar Conta</button>
         </form>
 
         <div class="auth-toggle">
-            <p>Já tem uma conta? <a href="/refactor/pages/auth/login.php">Entrar</a></p>
+            <p>Já tem uma conta? <a href="<?php echo url('pages/auth/login.php'); ?>">Entrar</a></p>
         </div>
     </div>
 </div>
 
-<?php require_once __DIR__ . '/../../includes/footer.php'; ?>
+<?php
+$additionalJS = [asset('js/auth.js')];
+include __DIR__ . '/../../components/footer.php';
+?>

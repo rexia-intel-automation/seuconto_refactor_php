@@ -3,10 +3,6 @@
  * Wizard de Criação - Passo 4: Checkout e Pagamento
  */
 
-$pageTitle = 'Finalizar Pedido - Seu Conto';
-$pageDescription = 'Complete seu pedido e receba o livro mágico';
-$additionalCSS = ['/refactor/assets/css/wizard.css'];
-
 // Carrega dependências
 require_once __DIR__ . '/../../config/paths.php';
 require_once __DIR__ . '/../../config/config.php';
@@ -15,6 +11,10 @@ require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/functions.php';
 require_once __DIR__ . '/../../services/OrderService.php';
 require_once __DIR__ . '/../../services/PaymentService.php';
+
+$pageTitle = 'Finalizar Pedido - Seu Conto';
+$pageDescription = 'Complete seu pedido e receba o livro mágico';
+$additionalCSS = [asset('css/wizard.css')];
 
 // Requer autenticação
 requireAuth();

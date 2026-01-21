@@ -4,16 +4,16 @@
  * Autenticação separada para administradores
  */
 
-$pageTitle = 'Admin Login - Seu Conto';
-$pageDescription = 'Acesso restrito à área administrativa';
-$additionalCSS = ['/refactor/assets/css/auth.css'];
-
 // Carrega dependências
 require_once __DIR__ . '/../../config/paths.php';
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/permissions.php';
 require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/functions.php';
+
+$pageTitle = 'Admin Login - Seu Conto';
+$pageDescription = 'Acesso restrito à área administrativa';
+$additionalCSS = [asset('css/auth.css')];
 
 // Redireciona se já está logado como admin
 if (isLoggedIn() && isAdmin()) {

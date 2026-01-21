@@ -1,18 +1,29 @@
 <?php
-$pageTitle = 'Login - Seu Conto';
-$additionalCSS = ['/refactor/assets/css/auth.css'];
-$additionalJS = ['/refactor/assets/js/auth.js'];
+/**
+ * Login Page
+ */
 
+require_once __DIR__ . '/../../config/paths.php';
 require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/functions.php';
 
+$pageTitle = 'Login - Seu Conto';
+$pageDescription = 'Entre para acessar seus livros personalizados';
+
 // Redireciona se já está logado
 if (isLoggedIn()) {
-    redirect('/refactor/pages/dashboard.php');
+    redirectTo('pages/dashboard.php');
 }
-
-require_once __DIR__ . '/../../includes/header.php';
 ?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <?php include __DIR__ . '/../../components/head.php'; ?>
+    <link rel="stylesheet" href="<?php echo asset('css/auth.css'); ?>">
+</head>
+<body>
+
+    <?php include __DIR__ . '/../../components/header.php'; ?>
 
 <div class="auth-container">
     <div class="auth-card">
@@ -52,9 +63,12 @@ require_once __DIR__ . '/../../includes/header.php';
         </form>
 
         <div class="auth-toggle">
-            <p>Não tem uma conta? <a href="/refactor/pages/auth/register.php">Criar conta</a></p>
+            <p>Não tem uma conta? <a href="<?php echo url('pages/auth/register.php'); ?>">Criar conta</a></p>
         </div>
     </div>
 </div>
 
-<?php require_once __DIR__ . '/../../includes/footer.php'; ?>
+<?php
+$additionalJS = [asset('js/auth.js')];
+include __DIR__ . '/../../components/footer.php';
+?>

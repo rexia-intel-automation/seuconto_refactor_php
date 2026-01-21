@@ -4,15 +4,15 @@
  * Tela de espera enquanto a IA gera o livro
  */
 
-$pageTitle = 'Gerando seu Livro... | Seu Conto';
-$pageDescription = 'Nossa IA está criando uma história mágica';
-$additionalCSS = ['/refactor/assets/css/wizard.css'];
-
 // Carrega dependências
 require_once __DIR__ . '/../../config/paths.php';
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/functions.php';
+
+$pageTitle = 'Gerando seu Livro... | Seu Conto';
+$pageDescription = 'Nossa IA está criando uma história mágica';
+$additionalCSS = [asset('css/wizard.css')];
 
 // Requer autenticação
 requireAuth();

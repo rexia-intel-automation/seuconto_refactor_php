@@ -149,7 +149,7 @@ async function handleRegisterSubmit(event) {
     window.SeuConto.setButtonLoading(submitButton);
 
     try {
-        const response = await window.SeuConto.fetchAPI('/refactor/api/auth.php', {
+        const response = await window.SeuConto.fetchAPI(window.BASE_PATH + '/api/auth.php', {
             method: 'POST',
             body: JSON.stringify({
                 action: 'register',
@@ -165,7 +165,7 @@ async function handleRegisterSubmit(event) {
 
             // Redireciona após 1 segundo
             setTimeout(() => {
-                window.location.href = '/refactor/pages/dashboard.php';
+                window.location.href = window.BASE_PATH + '/pages/dashboard.php';
             }, 1000);
         } else {
             throw new Error(response.message || 'Erro ao criar conta');
@@ -220,7 +220,7 @@ async function handleLoginSubmit(event) {
     window.SeuConto.setButtonLoading(submitButton);
 
     try {
-        const response = await window.SeuConto.fetchAPI('/refactor/api/auth.php', {
+        const response = await window.SeuConto.fetchAPI(window.BASE_PATH + '/api/auth.php', {
             method: 'POST',
             body: JSON.stringify({
                 action: 'login',
@@ -233,7 +233,7 @@ async function handleLoginSubmit(event) {
 
             // Redireciona
             const redirectUrl = new URLSearchParams(window.location.search).get('redirect')
-                || '/refactor/pages/dashboard.php';
+                || window.BASE_PATH + '/pages/dashboard.php';
 
             setTimeout(() => {
                 window.location.href = redirectUrl;
@@ -258,7 +258,7 @@ async function handleLoginSubmit(event) {
  */
 async function handleLogout() {
     try {
-        const response = await window.SeuConto.fetchAPI('/refactor/api/auth.php', {
+        const response = await window.SeuConto.fetchAPI(window.BASE_PATH + '/api/auth.php', {
             method: 'POST',
             body: JSON.stringify({ action: 'logout' })
         });
@@ -266,7 +266,7 @@ async function handleLogout() {
         if (response.success) {
             window.SeuConto.showToast('Logout realizado com sucesso', 'success');
             setTimeout(() => {
-                window.location.href = '/refactor/index.php';
+                window.location.href = window.BASE_PATH + '/index.php';
             }, 500);
         }
     } catch (error) {
@@ -462,14 +462,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Botão de logout
+    // Botão de logout (desktop e mobile)
     const logoutButton = document.getElementById('logout-button');
+    const logoutButtonMobile = document.getElementById('logout-button-mobile');
+
+    const handleLogoutClick = (e) => {
+        e.preventDefault();
+        if (confirm('Tem certeza que deseja sair?')) {
+            handleLogout();
+        }
+    };
+
     if (logoutButton) {
-        logoutButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (confirm('Tem certeza que deseja sair?')) {
-                handleLogout();
-            }
-        });
+        logoutButton.addEventListener('click', handleLogoutClick);
+    }
+
+    if (logoutButtonMobile) {
+        logoutButtonMobile.addEventListener('click', handleLogoutClick);
     }
 });

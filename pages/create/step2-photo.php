@@ -3,15 +3,15 @@
  * Wizard de Criação - Passo 2: Foto e Dados da Criança
  */
 
-$pageTitle = 'Foto e Dados - Criar Livro | Seu Conto';
-$pageDescription = 'Envie a foto e conte sobre a criança';
-$additionalCSS = ['/refactor/assets/css/wizard.css'];
-
 // Carrega dependências
 require_once __DIR__ . '/../../config/paths.php';
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/functions.php';
+
+$pageTitle = 'Foto e Dados - Criar Livro | Seu Conto';
+$pageDescription = 'Envie a foto e conte sobre a criança';
+$additionalCSS = [asset('css/wizard.css')];
 
 // Requer autenticação
 requireAuth();
