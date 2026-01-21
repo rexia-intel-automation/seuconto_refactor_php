@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
+require_once __DIR__ . '/../config/paths.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../config/db.php';
@@ -91,8 +92,8 @@ try {
                 'payment_method_types' => ['card'],
                 'line_items' => $lineItems,
                 'mode' => 'payment',
-                'success_url' => getBaseUrl() . '/refactor/pages/sucesso.php?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => getBaseUrl() . '/refactor/pages/checkout.php',
+                'success_url' => BASE_URL . '/pages/create/step4-checkout.php?order_id=' . $orderId . '&session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => BASE_URL . '/pages/create/step4-checkout.php?order_id=' . $orderId,
                 'client_reference_id' => $orderId,
                 'customer_email' => $input['customerEmail'],
             ]);

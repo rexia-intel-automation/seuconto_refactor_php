@@ -3,15 +3,15 @@
  * Wizard de Criação - Passo 1: Escolha do Tema
  */
 
-$pageTitle = 'Escolha o Tema - Criar Livro | Seu Conto';
-$pageDescription = 'Escolha o tema perfeito para a história personalizada';
-$additionalCSS = ['/refactor/assets/css/wizard.css'];
-
 // Carrega dependências
 require_once __DIR__ . '/../../config/paths.php';
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/functions.php';
+
+$pageTitle = 'Escolha o Tema - Criar Livro | Seu Conto';
+$pageDescription = 'Escolha o tema perfeito para a história personalizada';
+$additionalCSS = [asset('css/wizard.css')];
 
 // Obtém dados do usuário
 $currentUser = getCurrentUser();
