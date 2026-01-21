@@ -2,6 +2,12 @@
  * SEU CONTO - Estilos do Dashboard v2.0
  *
  * Mobile First com bordas 3px e sombras fortes
+ *
+ * BREAKPOINTS (Mobile-First):
+ * - 480px:  Small phones → Large phones (2-col grids)
+ * - 640px:  Tablets / Landscape phones
+ * - 768px:  Desktop (navigation visible)
+ * - 1024px: Large desktop (expanded layouts)
  */
 
 /* ============================================

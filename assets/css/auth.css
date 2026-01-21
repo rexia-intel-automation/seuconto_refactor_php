@@ -2,74 +2,125 @@
  * SEU CONTO - Estilos de Autenticação
  *
  * Estilos específicos para as páginas de login e registro
+ *
+ * Mobile-First Approach
+ * Breakpoints: 640px (tablet/desktop)
  */
 
 /* ============================================
-   CONTAINER DE AUTENTICAÇÃO
+   CONTAINER DE AUTENTICAÇÃO (Mobile-First)
    ============================================ */
 .auth-container {
     min-height: calc(100vh - 80px);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem 1rem;
+    padding: 1rem;
     background: radial-gradient(ellipse at top right, var(--color-accent) 0%, var(--color-background) 50%, var(--color-background) 100%);
 }
 
+/* Tablet+: more padding */
+@media (min-width: 640px) {
+    .auth-container {
+        padding: 2rem 1rem;
+    }
+}
+
+/* Mobile: compact card padding */
 .auth-card {
     width: 100%;
     max-width: 480px;
     background: var(--color-card);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
-    padding: 2.5rem;
+    padding: 1.5rem;
     box-shadow: var(--shadow-xl);
     animation: fadeIn 0.5s ease-out;
 }
 
-@media (max-width: 640px) {
+/* Tablet+: larger card padding */
+@media (min-width: 640px) {
     .auth-card {
-        padding: 2rem 1.5rem;
+        padding: 2.5rem;
     }
 }
 
 /* ============================================
-   HEADER DO CARD
+   HEADER DO CARD (Mobile-First)
    ============================================ */
 .auth-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
+@media (min-width: 640px) {
+    .auth-header {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Mobile: smaller logo */
 .auth-logo {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     background: linear-gradient(135deg, var(--color-primary), oklch(0.60 0.20 280));
     border-radius: 50%;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     box-shadow: var(--shadow-md);
 }
 
+/* Tablet+: larger logo */
+@media (min-width: 640px) {
+    .auth-logo {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 1rem;
+    }
+}
+
 .auth-logo svg {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     color: white;
 }
 
+@media (min-width: 640px) {
+    .auth-logo svg {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Mobile: smaller title */
 .auth-title {
     font-family: var(--font-heading);
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: var(--color-foreground);
 }
 
+/* Tablet+: larger title */
+@media (min-width: 640px) {
+    .auth-title {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile: smaller subtitle */
 .auth-subtitle {
     color: var(--color-muted-foreground);
-    font-size: 1rem;
+    font-size: 0.875rem;
+}
+
+/* Tablet+: larger subtitle */
+@media (min-width: 640px) {
+    .auth-subtitle {
+        font-size: 1rem;
+    }
 }
 
 /* ============================================
@@ -166,12 +217,14 @@
 }
 
 /* ============================================
-   BOTÃO DE SUBMIT
+   BOTÃO DE SUBMIT (Mobile-First)
    ============================================ */
+
+/* Mobile: smaller button */
 .auth-submit {
     width: 100%;
-    padding: 1rem;
-    font-size: 1.125rem;
+    padding: 0.875rem;
+    font-size: 1rem;
     font-weight: 700;
     background: linear-gradient(135deg, var(--color-primary), oklch(0.60 0.20 280));
     color: white;
@@ -180,6 +233,14 @@
     cursor: pointer;
     transition: all var(--transition-base);
     margin-bottom: 1.5rem;
+}
+
+/* Tablet+: larger button */
+@media (min-width: 640px) {
+    .auth-submit {
+        padding: 1rem;
+        font-size: 1.125rem;
+    }
 }
 
 .auth-submit:hover:not(:disabled) {
@@ -438,18 +499,10 @@
 }
 
 /* ============================================
-   RESPONSIVIDADE
+   MOBILE-FIRST RESPONSIVE NOTES
+   ============================================
+   This file uses a mobile-first approach.
+   Base styles are for mobile devices.
+   Breakpoints:
+   - 640px: Tablet/Desktop
    ============================================ */
-@media (max-width: 640px) {
-    .auth-title {
-        font-size: 1.75rem;
-    }
-
-    .auth-subtitle {
-        font-size: 0.875rem;
-    }
-
-    .auth-submit {
-        font-size: 1rem;
-    }
-}
