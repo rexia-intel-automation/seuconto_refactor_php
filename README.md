@@ -217,20 +217,52 @@ PRICE_COLORING_BOOK=990
 
 ## 💾 Banco de Dados
 
-### Tabelas Criadas
+### Schema Completo
+
+```
+┌─────────────┐       ┌─────────────┐       ┌─────────────┐
+│   users     │       │   orders    │       │   themes    │
+├─────────────┤       ├─────────────┤       ├─────────────┤
+│ id (PK)     │◄──────┤ user_id(FK) │       │ id (PK)     │
+│ full_name   │       │ theme ──────┼──────►│ slug        │
+│ email       │       │ status      │       │ name        │
+│ phone       │       │ ...         │       │ emoji       │
+│ password    │       └─────────────┘       │ ...         │
+│ role        │              │              └─────────────┘
+│ ...         │              │
+└─────────────┘              │
+      │                      │
+      │    ┌─────────────────┘
+      │    │
+      ▼    ▼
+┌─────────────┐       ┌─────────────┐
+│ user_books  │       │  sessions   │
+├─────────────┤       ├─────────────┤
+│ id (PK)     │       │ id (PK)     │
+│ user_id(FK) │       │ user_id(FK) │
+│ order_id(FK)│       │ expires_at  │
+│ book_uuid   │       │ ...         │
+│ status      │       └─────────────┘
+│ pdf_url     │
+│ ...         │
+└─────────────┘
+```
+
+### Tabelas
 
 #### `users`
 Armazena dados dos usuários registrados.
 
 | Campo | Tipo | Descrição |
 |-------|------|-----------|
-| id | INT AUTO_INCREMENT | ID único |
+| id | INT AUTO_INCREMENT | ID único (PK) |
 | full_name | VARCHAR(255) | Nome completo |
 | email | VARCHAR(320) UNIQUE | Email (login) |
 | phone | VARCHAR(20) | Telefone/WhatsApp |
-| password_hash | VARCHAR(255) | Senha criptografada |
+| password_hash | VARCHAR(255) | Senha criptografada (bcrypt) |
 | role | ENUM('user','admin') | Papel do usuário |
 | created_at | TIMESTAMP | Data de criação |
+| updated_at | TIMESTAMP | Última atualização |
 | last_login | TIMESTAMP | Último login |
 
 #### `orders`
@@ -238,33 +270,112 @@ Armazena pedidos de livros.
 
 | Campo | Tipo | Descrição |
 |-------|------|-----------|
-| id | INT AUTO_INCREMENT | ID único |
+| id | INT AUTO_INCREMENT | ID único (PK) |
 | user_id | INT | FK para users (opcional) |
 | customer_name | VARCHAR(255) | Nome do cliente |
 | customer_email | VARCHAR(320) | Email |
+| customer_phone | VARCHAR(20) | Telefone |
 | child_name | VARCHAR(100) | Nome da criança |
 | child_age | INT | Idade (0-12) |
-| theme | VARCHAR(50) | Tema escolhido |
-| includes_coloring_book | BOOLEAN | Livro de colorir |
+| child_gender | ENUM | 'menino', 'menina', 'outro' |
+| child_characteristics | TEXT | Descrição física |
+| child_photo_url | VARCHAR(500) | URL da foto |
+| theme | VARCHAR(50) | Tema escolhido (FK para themes.slug) |
+| dedication | TEXT | Dedicatória personalizada |
+| includes_coloring_book | BOOLEAN | Livro de colorir incluso |
+| base_price | INT | Preço base (centavos) |
+| coloring_book_price | INT | Preço do colorir (centavos) |
 | total_price | INT | Preço total (centavos) |
 | stripe_checkout_session_id | VARCHAR(255) | Session Stripe |
-| status | ENUM(...) | Status do pedido |
+| stripe_payment_intent_id | VARCHAR(255) | Payment Intent |
+| status | ENUM | 'pending', 'paid', 'processing', 'completed', 'cancelled', 'refunded' |
+| delivery_method | ENUM | 'email', 'whatsapp', 'both' |
+| delivered_at | TIMESTAMP | Data de entrega |
 | book_file_url | VARCHAR(500) | URL do PDF |
+| coloring_book_file_url | VARCHAR(500) | URL do colorir |
 | created_at | TIMESTAMP | Data de criação |
+| updated_at | TIMESTAMP | Última atualização |
+| paid_at | TIMESTAMP | Data do pagamento |
+
+#### `user_books`
+Biblioteca de livros do usuário (estrutura reservada).
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| id | INT AUTO_INCREMENT | ID único (PK) |
+| user_id | INT | FK para users (obrigatório) |
+| order_id | INT | FK para orders (opcional) |
+| book_uuid | VARCHAR(36) UNIQUE | UUID do livro |
+| status | ENUM | 'generating', 'ready', 'downloaded', 'archived' |
+| pdf_url | VARCHAR(500) | URL do PDF |
+| preview_url | VARCHAR(500) | URL do preview |
+| download_count | INT | Total de downloads |
+| view_count | INT | Total de visualizações |
+| created_at | TIMESTAMP | Data de criação |
+| updated_at | TIMESTAMP | Última atualização |
+| ready_at | TIMESTAMP | Data que ficou pronto |
+| last_downloaded_at | TIMESTAMP | Último download |
+
+> **Nota:** Campos adicionais de dados do livro (título, páginas, metadata) serão adicionados posteriormente.
 
 #### `sessions`
 Gerencia sessões de usuários.
 
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| id | VARCHAR(128) | ID da sessão (PK) |
+| user_id | INT | FK para users |
+| expires_at | TIMESTAMP | Expiração |
+| created_at | TIMESTAMP | Data de criação |
+
 #### `themes`
-Dados estáticos dos temas disponíveis (pré-populado).
+Dados estáticos dos temas disponíveis.
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| id | INT AUTO_INCREMENT | ID único (PK) |
+| slug | VARCHAR(50) UNIQUE | Identificador único |
+| name | VARCHAR(100) | Nome do tema |
+| emoji | VARCHAR(10) | Emoji representativo |
+| description | TEXT | Descrição |
+| color_primary | VARCHAR(50) | Cor primária (OKLch) |
+| color_secondary | VARCHAR(50) | Cor secundária (OKLch) |
+| is_active | BOOLEAN | Tema ativo |
+| display_order | INT | Ordem de exibição |
+
+**Temas pré-populados:**
+| Slug | Nome | Emoji |
+|------|------|-------|
+| coragem | Coragem | 🐉 |
+| amizade | Amizade | 🤝 |
+| exploracao | Exploração | 🦖 |
+| magia | Magia | 🧚 |
+
+### Views
+
+#### `orders_with_user`
+Pedidos com informações do usuário e tema.
+
+#### `order_stats`
+Estatísticas diárias de pedidos.
+
+### Usuários de Teste
+
+Para ambiente de desenvolvimento, execute `config/test-users.sql`:
+
+| Tipo | Email | Senha |
+|------|-------|-------|
+| Cliente | cliente@teste.com | teste123 |
+| Admin | admin@seuconto.com | admin123 |
 
 ### Migrations
 
-Para atualizar o schema do banco:
-
 ```sql
--- Execute no phpMyAdmin
+-- Schema principal
 SOURCE config/database.sql;
+
+-- Usuários de teste (opcional)
+SOURCE config/test-users.sql;
 ```
 
 ---
