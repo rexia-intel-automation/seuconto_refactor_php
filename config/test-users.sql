@@ -16,7 +16,7 @@ INSERT INTO users (full_name, email, phone, password_hash, role, created_at) VAL
     'Cliente Teste',
     'cliente@teste.com',
     '11999999999',
-    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', -- senha: teste123
+    '$2y$12$A5rwkZY/ukuVNcjFMMQdE.EvTAVYcdYXz9z9wuMH6B5J4uPtp9zyW', -- senha: teste123
     'user',
     NOW()
 );
@@ -29,7 +29,7 @@ INSERT INTO users (full_name, email, phone, password_hash, role, created_at) VAL
     'Administrador',
     'admin@seuconto.com',
     '11988888888',
-    '$2y$10$LgSPIm/Gkp.I2K3VH.SYqeGBuXkRQZJ/iO3xPQZ3dL2GpMj3X3C.i', -- senha: admin123
+    '$2y$12$MzM8tOTwPOJgSU5SgWnGwONTn8dTj4AHac2qbM6FsvsnNAt9nPJtq', -- senha: admin123
     'admin',
     NOW()
 );
